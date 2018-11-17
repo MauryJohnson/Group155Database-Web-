@@ -19,6 +19,7 @@
 				<a href="index.jsp">Home</a>
 				<a href="Beer.jsp">Beer</a>
 				<a href="Drinker.jsp">Drinker</a>
+				<a href="Modification.jsp">Modification</a>
 				<a href="Give Query.jsp">MySQL Query</a>
 		</nav>
 		<h1 class="clearfix"><a>Enter Bar Name</a></h1>
@@ -34,7 +35,7 @@
 %>
          <form action="BarGraphs.jsp" method="GET"> 
     	 <h1>
-         <textarea style="width:300px; height:20px;" class="myTextarea" name = "Bar1"><%try{if(sess.getAttribute(ip)!=null){out.print(sess.getAttribute(ip));}else{/*out.print("");*/}}catch(Exception e){}%></textarea>
+         <textarea style="width:300px; height:20px;" class="myTextarea" name = "Bar1"><%try{if(sess.getAttribute(ip+"Bar")!=null){out.print(sess.getAttribute(ip+"Bar"));}else{/*out.print("");*/}}catch(Exception e){}%></textarea>
          <input type="hidden" name ="query"/>	
 	     <input type="submit" name ="submit" value="Send"> 
 	     </h1>

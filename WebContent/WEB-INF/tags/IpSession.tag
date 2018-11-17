@@ -25,6 +25,6 @@ if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
 	sess.setAttribute(ip,qry);
 	sess.setMaxInactiveInterval(60*60*24);
 	
-	new QS(qry,ip);
+	//new QS(qry,ip);
 
 %>

@@ -41,7 +41,7 @@ try {
          
     	//out.println("Successfully connected to " + "MySQL server using TCP/IP...\n");
         
-         out.newLine();
+        out.newLine();
     	//Perform a query... TESTTTTT
     	Statement st = null;
     	ResultSet rs = null;
@@ -51,17 +51,27 @@ try {
     	//= "SELECT * FROM beer_transactions";
     	//QueryState Q = new QueryState("HELLO");
     	qry = "";
-    	qry = (String)request.getParameter("T");
-    	String ip = request.getHeader("X-Forwarded-For");  
-		
+    	qry = (String)request.getParameter("Mod");
+    	//String ip = request.getHeader("X-Forwarded-For");  
+	
+    	String Table = (String)request.getParameter("query");
+    	System.out.printf("\nTABEL GOT: %s\n",Table);
+    	
+    	
+    	QS.ValidateModification(qry,Table);
+    	
+    	/*
 		ip = QS.GetIp(ip,request);
 		
 		ip+="Query";
 		System.out.printf("\nIP + Q-%s\n",ip);
+		*/
 		
     	request.setAttribute("Query",qry);
     	//IF WANT TO KEEP TRACK OF IPS...
     	//QueryState Q = new QueryState("","");
+    	
+    	
     	
     	%>
     	<my:IpSession qry = "<%= qry %>" />

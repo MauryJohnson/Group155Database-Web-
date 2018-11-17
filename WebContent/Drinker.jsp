@@ -18,6 +18,7 @@
 				<a href="index.jsp">Home</a>
 				<a href="Bar.jsp">Bar</a>
 				<a href="Beer.jsp">Beer</a>
+				<a href="Modification.jsp">Modification</a>
 				<a href="Give Query.jsp">MySQL Query</a>
 		</nav>
 		
@@ -34,7 +35,7 @@
 %>
          <form action="DrinkerGraphs.jsp" method="GET"> 
     	 <h1>
-         <textarea style="width:300px; height:20px;" class="myTextarea" name = "Drinker1"><%try{if(sess.getAttribute(ip)!=null){out.print(sess.getAttribute(ip));}else{/*out.print("");*/}}catch(Exception e){}%></textarea>
+         <textarea style="width:300px; height:20px;" class="myTextarea" name = "Drinker1"><%try{if(sess.getAttribute(ip+"Drinker")!=null){out.print(sess.getAttribute(ip+"Drinker"));}else{/*out.print("");*/}}catch(Exception e){}%></textarea>
          <input type="hidden" name ="query"/>	
 	     <input type="submit" name ="submit" value="Send"> 
 	     </h1>

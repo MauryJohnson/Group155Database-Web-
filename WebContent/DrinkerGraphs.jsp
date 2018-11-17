@@ -28,8 +28,10 @@
 			<nav>
 
 				<a href="index.jsp" class="selected">Home</a> <a href="Drinker.jsp">Drinker</a>
-				<a href="Bar.jsp">Bar</a> <a href="Beer.jsp">Beer</a> <a
-					href="Give Query.jsp">MySQL Query</a>
+				<a href="Bar.jsp">Bar</a> <a href="Beer.jsp">Beer</a>
+				<a href="Modification.jsp">Modification</a> 
+				<a
+href="Give Query.jsp">MySQL Query</a>
 
 			</nav>
 
@@ -51,6 +53,9 @@
 						String Drinker = (String) request.getParameter("Drinker1");
 						//Add drinker name to query
 
+		
+    					request.setAttribute(ip+"Drinker",Drinker);
+						
 						String qry = QS.SetQuery(Drinker, 0);
 
 						if (qry == "") {

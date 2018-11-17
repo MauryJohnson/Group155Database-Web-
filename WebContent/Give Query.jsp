@@ -15,6 +15,7 @@
 				<a href="index.jsp">Home</a>
 				<a href="Bar.jsp">Bar</a>
 				<a href="Beer.jsp">Beer</a>
+				<a href="Modification.jsp">Modification</a>
 				<a href="Drinker.jsp">Drinker</a>
 		</nav>
 		<h1><a>Enter A Query</a></h1>
@@ -27,6 +28,11 @@
 		ip = QS.GetIp(ip,request);
 		
         HttpSession sess = request.getSession();
+        
+        //ip+="Query";
+        
+        System.out.printf("\nIP IN-%s\n",ip);
+        
 //new QueryState("SELECT * FROM frequents");
 %>
 	<!--  
@@ -37,7 +43,7 @@
     
     <form action="MySQL Query.jsp" method="GET">
     <h1>
-    <textarea class="myTextarea" name = "T"><%try{if(sess.getAttribute(ip)!=null){out.print(sess.getAttribute(ip));}else{/*out.print("");*/}}catch(Exception e){}%></textarea>
+    <textarea class="myTextarea" name = "T"><%try{if((String)sess.getAttribute(ip)!=null){out.print((String)sess.getAttribute(ip));}else{/*out.print("");*/}}catch(Exception e){}%></textarea>
     <input type="hidden" name ="query"/>	
     
 	 <input type="submit" name ="submit" value="Send"> 

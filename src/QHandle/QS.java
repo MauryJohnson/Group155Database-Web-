@@ -15,7 +15,9 @@ import java.sql.*;
 //Will hold info about the query to be given to MySQL Query page
 //Any query from queryState will be one query only
 public class QS {
+	
 	public static Hashtable<String,String> Queries = new Hashtable<String,String>();
+	
 	/**
 	 * If key exists, delete it and add new one
 	 * @param qry
@@ -24,14 +26,17 @@ public class QS {
 	public QS() {
 		
 	}
-	public QS(String qry,String ip) {
-		try {
-		Queries.put(ip, qry);
-		}
-		catch(Exception e) {
-			
-		}
+	/**
+	 * 
+	 * @param Type
+	 * @param Data
+	 */
+	
+	public void PutEntry(int Type, String Data) {
+		
+		
 	}
+	
 	/**
 	 * Get Query by user ip
 	 * @param ip
@@ -515,6 +520,169 @@ public class QS {
 					"";
 		}
 		return ret;
+	}
+	
+	//Many queries to parse type from
+	public static String[] ParseType(String[]Queries, String Table) {
+		String [] Types = new String[Queries.length];
+		String Name = "";
+		
+		for(int i=0; i<Queries.length;i+=1) {
+			Name = "";
+			int LastPosition = 0;
+			int j=0;
+			
+			for(j=0;j<Queries[i].length();j+=1) {
+				if(Queries[i].substring(j, j+1)!=" ") {
+					break;
+				}
+			}
+			
+			//This must be where query starts, or else failed
+			
+			for(; j<Queries[i].length() && j<6;j+=1) {
+			Name+=Queries[i].substring(j, j+1);
+			LastPosition = j;
+			}
+			System.out.printf("\n GOT FUNC: %s\n",Name.toLowerCase());
+			if(Name.toLowerCase().equals("UPDATE")) {
+				Types[i]+="UPDATE";
+				String MyTable = "";
+				for(int k=LastPosition+2;k<Queries[i].length()&&Queries[i].substring(k, k+1)!=" ";k+=1) {
+					MyTable+=Queries[i].substring(k, k+1);
+				}
+				Types[i]+=" "+MyTable;
+			}
+			else if(Name.toLowerCase().equals("INSERT")) {
+				Types[i]+="INSERT";
+				String MyTable = "";
+				for(int k=LastPosition+2;k<Queries[i].length()&&Queries[i].substring(k, k+1)!=" ";k+=1) {
+					MyTable+=Queries[i].substring(k, k+1);
+				}
+				Types[i]+=" "+MyTable;
+			}
+			else if(Name.toLowerCase().equals("DELETE")) {
+				Types[i]+="DELETE";
+				String MyTable = "";
+				for(int k=LastPosition+2;k<Queries[i].length()&&Queries[i].substring(k, k+1)!=" ";k+=1) {
+					MyTable+=Queries[i].substring(k, k+1);
+				}
+				Types[i]+=" "+MyTable;
+			}
+			else {
+				return null;
+			}
+		}
+		
+		return Types;
+	}
+	
+	public static int IterateCheck(String[] Queries, String Type,int t) {
+		
+		
+		
+		for(int i=0; i<Queries.length;i+=1) {
+			
+		}
+		
+		return t;
+	}
+	
+	public static int ValidateModification(String qry,String Table) {
+		String[] Queries = qry.split(";");
+	
+		for(int i=0; i<Queries.length;i+=1) {
+			System.out.printf("\nSPLIT Q %d:%s\n",i,Queries[i]);
+		}
+		
+		String[] AllTables = ParseType(Queries,Table);
+		
+		//Invalid Table type
+		if(AllTables==null) {
+			return -2;
+		}
+		
+		for(int i=0; i<AllTables.length;i+=1) {
+			System.out.printf("\nTABLE %d:%s\n",i,AllTables[i]);
+		}
+		
+		//Bar
+		//if(Type==1) {
+			if(AllTables[0].split(" ")[0].equals("UPDATE")) {
+				return 1;
+			}
+			else if(AllTables[0].split(" ")[0].equals("INSERT") ) {
+				return 2;
+			}
+			else if(AllTables[0].split(" ")[0].equals("DELETE")) {
+				return 3;
+			}
+		/*	
+		//}
+		//Beer
+		//else if(Type==2) {
+			if(AllTables[0].split(" ")[0].equals("UPDATE") || AllTables[0].split(" ")[0].equals("INSERT") || AllTables[0].split(" ")[0].equals("DELETE")) {
+				return Table.toLowerCase().equals("beer");
+			}
+		//}
+		//Drinker
+		//else if(Type==3) {
+			if(AllTables[0].split(" ")[0].equals("UPDATE") || AllTables[0].split(" ")[0].equals("INSERT") || AllTables[0].split(" ")[0].equals("DELETE")) {
+				return Table.toLowerCase().equals("drinker");
+			}	
+		//}
+		//Frequents
+		//else if(Type==4) {
+			if(AllTables[0].split(" ")[0].equals("UPDATE") || AllTables[0].split(" ")[0].equals("INSERT") || AllTables[0].split(" ")[0].equals("DELETE")) {
+				return Table.toLowerCase().equals("frequents");
+			}
+		//}
+		//Likes
+		//else if(Type==5) {
+			if(AllTables[0].split(" ")[0].equals("UPDATE") || AllTables[0].split(" ")[0].equals("INSERT") || AllTables[0].split(" ")[0].equals("DELETE")) {
+				return Table.toLowerCase().equals("likes");
+			}
+		//}
+		//Food Sells
+		//else if(Type==6) {
+			if(AllTables[0].split(" ")[0].equals("UPDATE") || AllTables[0].split(" ")[0].equals("INSERT") || AllTables[0].split(" ")[0].equals("DELETE")) {
+				return Table.toLowerCase().equals("foodsells");
+			}
+		//}
+		//Beer Sells
+		//else if(Type==7) {
+			if(AllTables[0].split(" ")[0].equals("UPDATE") || AllTables[0].split(" ")[0].equals("INSERT") || AllTables[0].split(" ")[0].equals("DELETE")) {
+				return Table.toLowerCase().equals("beersells");
+			}
+		//}
+		//Soft Drink Sells
+		//else if(Type==8) {
+			if(AllTables[0].split(" ")[0].equals("UPDATE") || AllTables[0].split(" ")[0].equals("INSERT") || AllTables[0].split(" ")[0].equals("DELETE")) {
+				return Table.toLowerCase().equals("softdrinksells");
+			}
+		//}
+		//Food Transactions
+		//else if(Type==9) {
+			if(AllTables[0].split(" ")[0].equals("UPDATE") || AllTables[0].split(" ")[0].equals("INSERT") || AllTables[0].split(" ")[0].equals("DELETE")) {
+				return Table.toLowerCase().equals("foodtransactions");
+			}
+		//}
+		//Beer Transactions
+		//else if(Type==10) {
+			if(AllTables[0].split(" ")[0].equals("UPDATE") || AllTables[0].split(" ")[0].equals("INSERT") || AllTables[0].split(" ")[0].equals("DELETE")) {
+				return Table.toLowerCase().equals("beertransactions");
+			}	
+		//}
+		//Soft Drink Transactions
+		//else if(Type==11) {
+			if(AllTables[0].split(" ")[0].equals("UPDATE") || AllTables[0].split(" ")[0].equals("INSERT") || AllTables[0].split(" ")[0].equals("DELETE")) {
+				return Table.toLowerCase().equals("softdrinktransactions");
+			}
+		//}
+		*/
+		
+		//Not recognized query
+		return -1;
 	}
 	
 	public static String GetIp(String ip,HttpServletRequest R) {
