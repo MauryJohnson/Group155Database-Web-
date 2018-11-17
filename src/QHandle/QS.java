@@ -346,6 +346,174 @@ public class QS {
 					"";
 			
 		}
+		else if(type==9) {
+			ret+="      #Busiest periods of day..... TIME, within 1-12 hour periods\r\n" + 
+					"#Busiest period for beer, then food, then soft drink\r\n" + 
+					"#transactions for givne BAR\r\n" + 
+					"SET @HourCount1:=0;\r\n" + 
+					"SET @HourCount2:=0;\r\n" + 
+					"SET @HourCount3:=0;\r\n" + 
+					"SET @HourCount4:=0;\r\n" + 
+					"SET @HourCount5:=0;\r\n" + 
+					"SET @HourCount6:=0;\r\n" + 
+					"SET @HourCount7:=0;\r\n" + 
+					"SET @HourCount8:=0;\r\n" + 
+					"SET @HourCount9:=0;\r\n" + 
+					"SET @HourCount10:=0;\r\n" + 
+					"SET @HourCount11:=0;\r\n" + 
+					"SET @HourCount12:=0;\r\n" + 
+					"SET @MaxTimeWindow:=0;\r\n" + 
+					"SET @MaxTimeWindowOccurrence:=0;\r\n" + 
+					"\r\n" + 
+					"#Will look at 1,...,12 hour periods\r\n" + 
+					"#To find busiest period of the day\r\n" + 
+					"SELECT DISTINCT HOUR(T.time_of_transaction) AS HOUR,@MaxTimeWindow:=\r\n" + 
+					"(CASE\r\n" + 
+					"	\r\n" + 
+					"	WHEN @HourCount1>=@HourCount2 AND @HourCount1>=@HourCount3 AND @HourCount1>=@HourCount4 AND @HourCount1>=@HourCount5 AND @HourCount1>=@HourCount6 AND @HourCount1>=@HourCount7 AND @HourCount1>=@HourCount8 AND @HourCount1>=@HourCount9 AND @HourCount1>=@HourCount10 AND @HourCount1>=@HourCount11 AND @HourCount1>=@HourCount12 \r\n" + 
+					" THEN 1\r\n" + 
+					"WHEN @HourCount2>=@HourCount1 AND @HourCount2>=@HourCount3 AND @HourCount2>=@HourCount4 AND @HourCount2>=@HourCount5 AND @HourCount2>=@HourCount6 AND @HourCount2>=@HourCount7 AND @HourCount2>=@HourCount8 AND @HourCount2>=@HourCount9 AND @HourCount2>=@HourCount10 AND @HourCount2>=@HourCount11 AND @HourCount2>=@HourCount12 \r\n" + 
+					" THEN 2\r\n" + 
+					"WHEN @HourCount3>=@HourCount1 AND @HourCount3>=@HourCount2 AND @HourCount3>=@HourCount4 AND @HourCount3>=@HourCount5 AND @HourCount3>=@HourCount6 AND @HourCount3>=@HourCount7 AND @HourCount3>=@HourCount8 AND @HourCount3>=@HourCount9 AND @HourCount3>=@HourCount10 AND @HourCount3>=@HourCount11 AND @HourCount3>=@HourCount12 \r\n" + 
+					" THEN 3\r\n" + 
+					"WHEN @HourCount4>=@HourCount1 AND @HourCount4>=@HourCount2 AND @HourCount4>=@HourCount3 AND @HourCount4>=@HourCount5 AND @HourCount4>=@HourCount6 AND @HourCount4>=@HourCount7 AND @HourCount4>=@HourCount8 AND @HourCount4>=@HourCount9 AND @HourCount4>=@HourCount10 AND @HourCount4>=@HourCount11 AND @HourCount4>=@HourCount12 \r\n" + 
+					" THEN 4\r\n" + 
+					"WHEN @HourCount5>=@HourCount1 AND @HourCount5>=@HourCount2 AND @HourCount5>=@HourCount3 AND @HourCount5>=@HourCount4 AND @HourCount5>=@HourCount6 AND @HourCount5>=@HourCount7 AND @HourCount5>=@HourCount8 AND @HourCount5>=@HourCount9 AND @HourCount5>=@HourCount10 AND @HourCount5>=@HourCount11 AND @HourCount5>=@HourCount12 \r\n" + 
+					" THEN 5\r\n" + 
+					"WHEN @HourCount6>=@HourCount1 AND @HourCount6>=@HourCount2 AND @HourCount6>=@HourCount3 AND @HourCount6>=@HourCount4 AND @HourCount6>=@HourCount5 AND @HourCount6>=@HourCount7 AND @HourCount6>=@HourCount8 AND @HourCount6>=@HourCount9 AND @HourCount6>=@HourCount10 AND @HourCount6>=@HourCount11 AND @HourCount6>=@HourCount12 \r\n" + 
+					" THEN 6\r\n" + 
+					"WHEN @HourCount7>=@HourCount1 AND @HourCount7>=@HourCount2 AND @HourCount7>=@HourCount3 AND @HourCount7>=@HourCount4 AND @HourCount7>=@HourCount5 AND @HourCount7>=@HourCount6 AND @HourCount7>=@HourCount8 AND @HourCount7>=@HourCount9 AND @HourCount7>=@HourCount10 AND @HourCount7>=@HourCount11 AND @HourCount7>=@HourCount12 \r\n" + 
+					" THEN 7\r\n" + 
+					"WHEN @HourCount8>=@HourCount1 AND @HourCount8>=@HourCount2 AND @HourCount8>=@HourCount3 AND @HourCount8>=@HourCount4 AND @HourCount8>=@HourCount5 AND @HourCount8>=@HourCount6 AND @HourCount8>=@HourCount7 AND @HourCount8>=@HourCount9 AND @HourCount8>=@HourCount10 AND @HourCount8>=@HourCount11 AND @HourCount8>=@HourCount12 \r\n" + 
+					" THEN 8\r\n" + 
+					"WHEN @HourCount9>=@HourCount1 AND @HourCount9>=@HourCount2 AND @HourCount9>=@HourCount3 AND @HourCount9>=@HourCount4 AND @HourCount9>=@HourCount5 AND @HourCount9>=@HourCount6 AND @HourCount9>=@HourCount7 AND @HourCount9>=@HourCount8 AND @HourCount9>=@HourCount10 AND @HourCount9>=@HourCount11 AND @HourCount9>=@HourCount12 \r\n" + 
+					" THEN 9\r\n" + 
+					"WHEN @HourCount10>=@HourCount1 AND @HourCount10>=@HourCount2 AND @HourCount10>=@HourCount3 AND @HourCount10>=@HourCount4 AND @HourCount10>=@HourCount5 AND @HourCount10>=@HourCount6 AND @HourCount10>=@HourCount7 AND @HourCount10>=@HourCount8 AND @HourCount10>=@HourCount9 AND @HourCount10>=@HourCount11 AND @HourCount10>=@HourCount12 \r\n" + 
+					" THEN 10\r\n" + 
+					"WHEN @HourCount11>=@HourCount1 AND @HourCount11>=@HourCount2 AND @HourCount11>=@HourCount3 AND @HourCount11>=@HourCount4 AND @HourCount11>=@HourCount5 AND @HourCount11>=@HourCount6 AND @HourCount11>=@HourCount7 AND @HourCount11>=@HourCount8 AND @HourCount11>=@HourCount9 AND @HourCount11>=@HourCount10 AND @HourCount11>=@HourCount12 \r\n" + 
+					" THEN 11\r\n" + 
+					"WHEN @HourCount12>=@HourCount1 AND @HourCount12>=@HourCount2 AND @HourCount12>=@HourCount3 AND @HourCount12>=@HourCount4 AND @HourCount12>=@HourCount5 AND @HourCount12>=@HourCount6 AND @HourCount12>=@HourCount7 AND @HourCount12>=@HourCount8 AND @HourCount12>=@HourCount9 AND @HourCount12>=@HourCount10 AND @HourCount12>=@HourCount11 \r\n" + 
+					" THEN 12\r\n" + 
+					"\r\n" + 
+					"\r\n" + 
+					"        \r\n" + 
+					"END\r\n" + 
+					")\r\n" + 
+					"AS HandleAllHoursCase\r\n" + 
+					",@MaxTimeWindowOccurrence:=\r\n" + 
+					"(\r\n" + 
+					"CASE\r\n" + 
+					"\r\n" + 
+					"WHEN @HourCount1>=@HourCount2 AND @HourCount1>=@HourCount3 AND @HourCount1>=@HourCount4 AND @HourCount1>=@HourCount5 AND @HourCount1>=@HourCount6 AND @HourCount1>=@HourCount7 AND @HourCount1>=@HourCount8 AND @HourCount1>=@HourCount9 AND @HourCount1>=@HourCount10 AND @HourCount1>=@HourCount11 AND @HourCount1>=@HourCount12 \r\n" + 
+					" THEN @HourCount1\r\n" + 
+					"WHEN @HourCount2>=@HourCount1 AND @HourCount2>=@HourCount3 AND @HourCount2>=@HourCount4 AND @HourCount2>=@HourCount5 AND @HourCount2>=@HourCount6 AND @HourCount2>=@HourCount7 AND @HourCount2>=@HourCount8 AND @HourCount2>=@HourCount9 AND @HourCount2>=@HourCount10 AND @HourCount2>=@HourCount11 AND @HourCount2>=@HourCount12 \r\n" + 
+					" THEN @HourCount2\r\n" + 
+					"WHEN @HourCount3>=@HourCount1 AND @HourCount3>=@HourCount2 AND @HourCount3>=@HourCount4 AND @HourCount3>=@HourCount5 AND @HourCount3>=@HourCount6 AND @HourCount3>=@HourCount7 AND @HourCount3>=@HourCount8 AND @HourCount3>=@HourCount9 AND @HourCount3>=@HourCount10 AND @HourCount3>=@HourCount11 AND @HourCount3>=@HourCount12 \r\n" + 
+					" THEN @HourCount3\r\n" + 
+					"WHEN @HourCount4>=@HourCount1 AND @HourCount4>=@HourCount2 AND @HourCount4>=@HourCount3 AND @HourCount4>=@HourCount5 AND @HourCount4>=@HourCount6 AND @HourCount4>=@HourCount7 AND @HourCount4>=@HourCount8 AND @HourCount4>=@HourCount9 AND @HourCount4>=@HourCount10 AND @HourCount4>=@HourCount11 AND @HourCount4>=@HourCount12 \r\n" + 
+					" THEN @HourCount4\r\n" + 
+					"WHEN @HourCount5>=@HourCount1 AND @HourCount5>=@HourCount2 AND @HourCount5>=@HourCount3 AND @HourCount5>=@HourCount4 AND @HourCount5>=@HourCount6 AND @HourCount5>=@HourCount7 AND @HourCount5>=@HourCount8 AND @HourCount5>=@HourCount9 AND @HourCount5>=@HourCount10 AND @HourCount5>=@HourCount11 AND @HourCount5>=@HourCount12 \r\n" + 
+					" THEN @HourCount5\r\n" + 
+					"WHEN @HourCount6>=@HourCount1 AND @HourCount6>=@HourCount2 AND @HourCount6>=@HourCount3 AND @HourCount6>=@HourCount4 AND @HourCount6>=@HourCount5 AND @HourCount6>=@HourCount7 AND @HourCount6>=@HourCount8 AND @HourCount6>=@HourCount9 AND @HourCount6>=@HourCount10 AND @HourCount6>=@HourCount11 AND @HourCount6>=@HourCount12 \r\n" + 
+					" THEN @HourCount6\r\n" + 
+					"WHEN @HourCount7>=@HourCount1 AND @HourCount7>=@HourCount2 AND @HourCount7>=@HourCount3 AND @HourCount7>=@HourCount4 AND @HourCount7>=@HourCount5 AND @HourCount7>=@HourCount6 AND @HourCount7>=@HourCount8 AND @HourCount7>=@HourCount9 AND @HourCount7>=@HourCount10 AND @HourCount7>=@HourCount11 AND @HourCount7>=@HourCount12 \r\n" + 
+					" THEN @HourCount7\r\n" + 
+					"WHEN @HourCount8>=@HourCount1 AND @HourCount8>=@HourCount2 AND @HourCount8>=@HourCount3 AND @HourCount8>=@HourCount4 AND @HourCount8>=@HourCount5 AND @HourCount8>=@HourCount6 AND @HourCount8>=@HourCount7 AND @HourCount8>=@HourCount9 AND @HourCount8>=@HourCount10 AND @HourCount8>=@HourCount11 AND @HourCount8>=@HourCount12 \r\n" + 
+					" THEN @HourCount8\r\n" + 
+					"WHEN @HourCount9>=@HourCount1 AND @HourCount9>=@HourCount2 AND @HourCount9>=@HourCount3 AND @HourCount9>=@HourCount4 AND @HourCount9>=@HourCount5 AND @HourCount9>=@HourCount6 AND @HourCount9>=@HourCount7 AND @HourCount9>=@HourCount8 AND @HourCount9>=@HourCount10 AND @HourCount9>=@HourCount11 AND @HourCount9>=@HourCount12 \r\n" + 
+					" THEN @HourCount9\r\n" + 
+					"WHEN @HourCount10>=@HourCount1 AND @HourCount10>=@HourCount2 AND @HourCount10>=@HourCount3 AND @HourCount10>=@HourCount4 AND @HourCount10>=@HourCount5 AND @HourCount10>=@HourCount6 AND @HourCount10>=@HourCount7 AND @HourCount10>=@HourCount8 AND @HourCount10>=@HourCount9 AND @HourCount10>=@HourCount11 AND @HourCount10>=@HourCount12 \r\n" + 
+					" THEN @HourCount10\r\n" + 
+					"WHEN @HourCount11>=@HourCount1 AND @HourCount11>=@HourCount2 AND @HourCount11>=@HourCount3 AND @HourCount11>=@HourCount4 AND @HourCount11>=@HourCount5 AND @HourCount11>=@HourCount6 AND @HourCount11>=@HourCount7 AND @HourCount11>=@HourCount8 AND @HourCount11>=@HourCount9 AND @HourCount11>=@HourCount10 AND @HourCount11>=@HourCount12 \r\n" + 
+					" THEN @HourCount11\r\n" + 
+					"WHEN @HourCount12>=@HourCount1 AND @HourCount12>=@HourCount2 AND @HourCount12>=@HourCount3 AND @HourCount12>=@HourCount4 AND @HourCount12>=@HourCount5 AND @HourCount12>=@HourCount6 AND @HourCount12>=@HourCount7 AND @HourCount12>=@HourCount8 AND @HourCount12>=@HourCount9 AND @HourCount12>=@HourCount10 AND @HourCount12>=@HourCount11 \r\n" + 
+					" THEN @HourCount12\r\n" + 
+					" \r\n" + 
+					" \r\n" + 
+					"END\r\n" + 
+					")\r\n" + 
+					"As MaxTimeWindowOccurrence\r\n" + 
+					"FROM beer_transactions T\r\n" + 
+					"\r\n" + 
+					"WHERE T.bar=" + "\"" + Param + "\"" + 
+					"\r\n" + 
+					"AND\r\n" + 
+					"(\r\n" + 
+					"SELECT @HourCount1:=COUNT(*) FROM beer_transactions T2\r\n" + 
+					"WHERE HOUR(T2.time_of_transaction)-HOUR(T.time_of_transaction)=1\r\n" + 
+					"AND T2.bar=T.bar\r\n" + 
+					")\r\n" + 
+					"+\r\n" + 
+					"(\r\n" + 
+					"SELECT @HourCount2:=COUNT(*) FROM beer_transactions T2\r\n" + 
+					"WHERE HOUR(T2.time_of_transaction)-HOUR(T.time_of_transaction)=2\r\n" + 
+					"AND T2.bar=T.bar\r\n" + 
+					")\r\n" + 
+					"+\r\n" + 
+					"(\r\n" + 
+					"SELECT @HourCount3:=COUNT(*) FROM beer_transactions T2\r\n" + 
+					"WHERE HOUR(T2.time_of_transaction)-HOUR(T.time_of_transaction)=3\r\n" + 
+					"AND T2.bar=T.bar\r\n" + 
+					")\r\n" + 
+					"+\r\n" + 
+					"(\r\n" + 
+					"SELECT @HourCount4:=COUNT(*) FROM beer_transactions T2\r\n" + 
+					"WHERE HOUR(T2.time_of_transaction)-HOUR(T.time_of_transaction)=4\r\n" + 
+					"AND T2.bar=T.bar\r\n" + 
+					")\r\n" + 
+					"+\r\n" + 
+					"(\r\n" + 
+					"SELECT @HourCount5:=COUNT(*) FROM beer_transactions T2\r\n" + 
+					"WHERE HOUR(T2.time_of_transaction)-HOUR(T.time_of_transaction)=5\r\n" + 
+					"AND T2.bar=T.bar\r\n" + 
+					")\r\n" + 
+					"+\r\n" + 
+					"(\r\n" + 
+					"SELECT @HourCount6:=COUNT(*) FROM beer_transactions T2\r\n" + 
+					"WHERE HOUR(T2.time_of_transaction)-HOUR(T.time_of_transaction)=6\r\n" + 
+					"AND T2.bar=T.bar\r\n" + 
+					")\r\n" + 
+					"+\r\n" + 
+					"(\r\n" + 
+					"SELECT @HourCount7:=COUNT(*) FROM beer_transactions T2\r\n" + 
+					"WHERE HOUR(T2.time_of_transaction)-HOUR(T.time_of_transaction)=7\r\n" + 
+					"AND T2.bar=T.bar\r\n" + 
+					")\r\n" + 
+					"+\r\n" + 
+					"(\r\n" + 
+					"SELECT @HourCount8:=COUNT(*) FROM beer_transactions T2\r\n" + 
+					"WHERE HOUR(T2.time_of_transaction)-HOUR(T.time_of_transaction)=8\r\n" + 
+					"AND T2.bar=T.bar\r\n" + 
+					")\r\n" + 
+					"+\r\n" + 
+					"(\r\n" + 
+					"SELECT @HourCount9:=COUNT(*) FROM beer_transactions T2\r\n" + 
+					"WHERE HOUR(T2.time_of_transaction)-HOUR(T.time_of_transaction)=9\r\n" + 
+					"AND T2.bar=T.bar\r\n" + 
+					")\r\n" + 
+					"+\r\n" + 
+					"(\r\n" + 
+					"SELECT @HourCount10:=COUNT(*) FROM beer_transactions T2\r\n" + 
+					"WHERE HOUR(T2.time_of_transaction)-HOUR(T.time_of_transaction)=10\r\n" + 
+					"AND T2.bar=T.bar\r\n" + 
+					")\r\n" + 
+					"+\r\n" + 
+					"(\r\n" + 
+					"SELECT @HourCount11:=COUNT(*) FROM beer_transactions T2\r\n" + 
+					"WHERE HOUR(T2.time_of_transaction)-HOUR(T.time_of_transaction)=11\r\n" + 
+					"AND T2.bar=T.bar\r\n" + 
+					")\r\n" + 
+					"+\r\n" + 
+					"(\r\n" + 
+					"SELECT @HourCount12:=COUNT(*) FROM beer_transactions T2\r\n" + 
+					"WHERE HOUR(T2.time_of_transaction)-HOUR(T.time_of_transaction)=12\r\n" + 
+					"AND T2.bar=T.bar\r\n" + 
+					")\r\n" + 
+					"\r\n" + 
+					"#O(2n) To get case for each hour  Hashtable insert, Hashtable iteration\r\n" + 
+					"ORDER BY MaxTimeWindowOccurrence DESC\r\n" + 
+					"";
+		}
 		return ret;
 	}
 	
@@ -400,6 +568,11 @@ public class QS {
 		            }
 		            if(Type==1) {
 		            	if(Count==3) {
+		            		return rs;
+		            	}
+		            }
+		            if(Type==2) {
+		            	if(Count==14) {
 		            		return rs;
 		            	}
 		            }

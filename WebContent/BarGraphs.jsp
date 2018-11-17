@@ -121,6 +121,20 @@
 						<my:PrintGraph setType="3"/>
 						<%	
 						
+						Statement st5 = connection.createStatement();
+						
+						qry = QS.SetQuery(Bar,9);
+						
+						//Gets last result set
+						
+						rs = QS.ReadQueryResults(st5,qry,2);
+						
+						rsmd = rs.getMetaData();
+						
+						%>
+						<my:SetGraph setQry="<%=qry%>" setTitle="Bar5" setCategory="Transactions for Months of Year" setXLabel="Consumables" setYLabel="Price" setRsmd="<%=rsmd%>" setRs="<%=rs%>" setType="4"/>
+						<my:PrintGraph setType="4"/>
+						<%
 						
 						}catch(Exception r){
 							System.err.println(r);
