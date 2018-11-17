@@ -39,7 +39,12 @@ public class Graph {
 	public static JFreeChart BarChart;
 	public static LinkedList<String> Files = new LinkedList<String>();
 
+	public static LinkedList<String> Keys;
+	
 	public static int Count = 0;
+	
+	public static int WIDTH = 5000;
+	public static int HEIGHT = 5000;
 	
 	public Graph() {
 
@@ -54,6 +59,9 @@ public class Graph {
 			  final ChartRenderingInfo info = new ChartRenderingInfo
 			   (new StandardEntityCollection());
 			
+			  
+			  Keys = null;
+			  
 			  Count+=1;
 			  
 			  final File file1 = new File(chartTitle+""+Count+".png");
@@ -65,7 +73,7 @@ public class Graph {
 			  }while(!Files.contains(file1.getAbsolutePath()));
 			  
 			  System.out.printf("Added new file:%s", file1.getAbsolutePath());
-			  ChartUtilities.saveChartAsPNG(file1, BarChart, 10000, 10000, info);
+			  ChartUtilities.saveChartAsPNG(file1, BarChart, WIDTH, HEIGHT, info);
 			  } catch (Exception e) {
 				 System.out.println(e);
 			  }
@@ -82,6 +90,7 @@ public class Graph {
 			Hashtable<String,double[]> H = new Hashtable<String,double[]>();
 			LinkedList<String>Keys=new LinkedList<String>();
 			
+			//Value (Frequency!)
 			try {
 				int BCount = 0;
 				String entry = "";
@@ -107,7 +116,7 @@ public class Graph {
 				//Iterate through HTable, store labels, group names, and occurrences
 				
 				//Set values to be used for coloring
-				SetDXG(D,H,Keys,XCategory,XGroupsLabels);
+				SetDXG(D,H,Keys,XCategory,XGroupsLabels,0);
 			
 				
 			} catch (SQLException e) {
@@ -117,6 +126,7 @@ public class Graph {
 			}
 			
 		}
+		//String1,...,String3,Value,String5
 		if(type==1) {
 			//Stage="../eclipse-workspace/Group155Database/Drinker1.png";
 			//XCategory : BeerNames
@@ -137,7 +147,7 @@ public class Graph {
 				}
 				
 				//Set values to be used for coloring
-				SetDXG(D,H,Keys,XCategory,XGroupsLabels);
+				SetDXG(D,H,Keys,XCategory,XGroupsLabels,1);
 			
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -145,6 +155,33 @@ public class Graph {
 			}
 			
 		}
+		//String,String,Value
+		if(type==2) {
+			
+			Hashtable<String,double[]> H = new Hashtable<String,double[]>();
+			LinkedList<String>Keys=new LinkedList<String>();
+			
+			try {
+				while(rs.next()) {
+						if(H.get(rs.getString(1))==null){
+							H.put(ExpandRS(rs,new int[] {1,2}),new double[] {Double.parseDouble(rs.getString(3))});
+							Keys.add(ExpandRS(rs,new int[] {1,2}));
+						}
+						//Old push, increase occurence count, shouldn't happen with Bar,cons,drinker,day->price....
+						else {
+							H.get(ExpandRS(rs,new int[] {1,2}));
+						}
+				}
+				
+				//Set values to be used for coloring
+				SetDXG(D,H,Keys,XCategory,XGroupsLabels,5);
+			
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 		
 		return ToD(D);
 	}
@@ -167,10 +204,13 @@ public class Graph {
 	}
 
 	private static void SetDXG(ArrayList<double[]> D, Hashtable<String, double[]> H, LinkedList<String> Keys,
-			LinkedList<String> XCategory, LinkedList<String> XGroupsLabels) {
+			LinkedList<String> XCategory, LinkedList<String> XGroupsLabels,int Type) {
 		// TODO Auto-generated method stub
 		String Key;
 		int i=0;
+		
+		Graph.Keys = Keys;
+		
 		while(i<Keys.size()) {
 			Key = Keys.get(i);
 			System.out.printf("KEY: %s\n",Key);
@@ -178,8 +218,16 @@ public class Graph {
 			System.out.printf("Key Unlocked:");
 			System.out.println(H.get(Key)[0]);
 			D.add(new double[] {H.get(Key)[0]});
+			
+			if(Type<5) {
 			XCategory.add(Key);
 			XGroupsLabels.add(Key);
+			}
+			else{
+			XCategory.add(Key.replaceAll("\n", ","));
+			XGroupsLabels.add(Key);
+			}
+			
 			}
 			i+=1;
 		}
@@ -234,7 +282,13 @@ public class Graph {
 				//For each category, ex beer,food,soft_d
 				for(int k=0; k<XCategories.size()&&k<Data[j].length;k+=1) {
 					//if(Type==0) {
+					if(Type<2) {
 					dataset.addValue(Data[j][k], XGroupsLabels.get(j), XCategories.get(k));
+					}
+					else {
+						System.out.printf("XCat: %s\n", XCategories.get(k));
+						dataset.addValue(Data[j][k], Graph.Keys.get(j).split("\n")[1], XCategories.get(k).split(",")[0]);	
+					}
 					//}
 					/*
 					else if(Type==1) {

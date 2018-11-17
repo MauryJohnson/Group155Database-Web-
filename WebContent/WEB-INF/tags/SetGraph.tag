@@ -26,6 +26,4 @@
 	//Must Parse double[][], String[] XCategory, String[]XGroupsLabels FROM TABLE
 	Graph.BG(D, setTitle, setCategory, setXLabel, setYLabel, XCategory, XGroupsLabels,Integer.parseInt(setType));
 
-
-	//new BarGraph(d, setTitle, setCategory, setXLabel, setYLabel, (String[]) XCategory,(String[]) XGroupsLabels);
 %>

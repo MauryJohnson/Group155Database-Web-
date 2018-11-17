@@ -277,7 +277,8 @@ public class QS {
 					")\r\n" + 
 					"AS AllSpending\r\n" + 
 					"FROM beer_transactions T\r\n" + 
-					"";
+					"WHERE T.bar=" + "\"" + Param + "\""
+					+ "\r\nORDER BY AllSpending ASC";
 		}
 		else if(type==6) {
 			ret+="";

@@ -27,9 +27,10 @@
 		<header>
 			<nav>
 
-				<a href="index.jsp" class="selected">Home</a> 
+				<a href="index.jsp">Home</a>
+				<a href="Beer.jsp">Beer</a>
 				<a href="Drinker.jsp">Drinker</a>
-				<a href="Beer.jsp">Beer</a> 
+				<a href="Bar.jsp">Bar</a>
 				<a href="Give Query.jsp">MySQL Query</a>
 
 			</nav>
@@ -48,22 +49,36 @@
 						}
 						ResultSet rs = null;
 
+						ResultSetMetaData rsmd = null;
+						
 						System.out.println("BAR GRAPHS 0");
+						
+						Graph.Files = null;
+						Graph.Files=new LinkedList<String>();
+						
 						
 						String Bar = (String) request.getParameter("Bar1");
 						//Add drinker name to query
 
-						String qry = QS.SetQuery("B", 5);
-
+						String qry = QS.SetQuery(Bar, 5);
+						rs = st.executeQuery(qry);
+						rsmd = rs.getMetaData();	
+						
 						if (qry == "") {
 							return;
 						}
-						String D = "Bar";
-			%>
-			
-			<%
-				
+						
+						try{
 							
+						%>
+						<my:SetGraph setQry="<%=qry%>" setTitle="Bar1" setCategory="Transactions for Months of Year" setXLabel="Consumables" setYLabel="Price" setRsmd="<%=rsmd%>" setRs="<%=rs%>" setType="2"/>
+						<my:PrintGraph setType="0"/>
+						<%
+				
+						}catch(Exception r){
+							System.err.println(r);
+							out.println(r);
+						}
 									//Graph.Files = null;
 									connection.close();
 									if(st!=null){

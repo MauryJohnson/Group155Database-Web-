@@ -17,8 +17,8 @@
 		
 		<nav>
 				<a href="index.jsp">Home</a>
-				<a href="Bar.jsp">Bar</a>
 				<a href="Beer.jsp">Beer</a>
+				<a href="Drinker.jsp">Drinker</a>
 				<a href="Give Query.jsp">MySQL Query</a>
 		</nav>
 		<h1 class="clearfix"><a>Enter Bar Name</a></h1>

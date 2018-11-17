@@ -115,7 +115,7 @@
 			rs = st.executeQuery(qry);
 			rsmd = rs.getMetaData();
 			%>
-			<my:SetGraph setQry="<%=qry%>" setTitle="Drinker4" setCategory="Transactions for Months of Year" setXLabel="Consumables" setYLabel="Price" setRsmd="<%=rsmd%>" setRs="<%=rs%>" setType="1"/>
+			<my:SetGraph setQry="<%=qry%>" setTitle="Bar1" setCategory="Largest Spenders of Drinkers" setXLabel="Consumables" setYLabel="Price" setRsmd="<%=rsmd%>" setRs="<%=rs%>" setType="1"/>
 			<my:PrintGraph setType="3"/>
 			<%
 			}
