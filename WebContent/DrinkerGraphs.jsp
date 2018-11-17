@@ -110,8 +110,17 @@
 			<my:SetGraph setQry="<%=qry%>" setTitle="Drinker3" setCategory="Transactions for Days of Week" setXLabel="Consumables" setYLabel="Price" setRsmd="<%=rsmd%>" setRs="<%=rs%>" setType="1"/>
 			<my:PrintGraph setType="2"/>
 			<%
+			//Fourth Image
+			qry = QS.SetQuery(Drinker, 4);
+			rs = st.executeQuery(qry);
+			rsmd = rs.getMetaData();
+			%>
+			<my:SetGraph setQry="<%=qry%>" setTitle="Drinker4" setCategory="Transactions for Months of Year" setXLabel="Consumables" setYLabel="Price" setRsmd="<%=rsmd%>" setRs="<%=rs%>" setType="1"/>
+			<my:PrintGraph setType="3"/>
+			<%
 			}
 			catch(Exception r){
+				System.out.println(r);
 				out.print(r);
 			}
 				}

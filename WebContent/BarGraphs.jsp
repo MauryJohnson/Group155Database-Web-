@@ -53,75 +53,17 @@
 						String Bar = (String) request.getParameter("Bar1");
 						//Add drinker name to query
 
-						String qry = QS.SetQuery(Bar, 6);
+						String qry = QS.SetQuery("B", 5);
 
 						if (qry == "") {
 							return;
 						}
 						String D = "Bar";
 			%>
-
-			<my:IpSession qry="<%=Bar%>" setSess="<%=D%>" />
-
-			<%
-				rs = st.executeQuery(qry);
-
-						if (rs == null) {
-							out.println("Unable to get result from query");
-							return;
-						} else {
-							if(rs==null){
-								return;
-							}
-							ResultSetMetaData rsmd = null;
-
-							out.println("\n");
-			%>
-			<h2><%=Bar%></h2>
-			<table>
-				<my:PrintTable rsmd="<%=rsmd%>" rs="<%=rs%>" />
-			</table>
-
-			<%
-				try{
-					
-					String qry2 = QS.SetQuery(Bar, 6);
-					ResultSet rs2 = st.executeQuery(qry2);
-					ResultSetMetaData rsmd2 = rs2.getMetaData();
-					
-				//First Image
-			%>
-			<h2>
-			Query 2
-			</h2>
-			<table>
-			<my:PrintTable rsmd="<%=rsmd2%>" rs="<%=rs2%>"/>
-			</table>
 			
 			<%
-							//First Image
-							//Second Image
-								
-								String qry3 = QS.SetQuery(Bar, 7);
-								ResultSet rs3 = st.executeQuery(qry3);
-								ResultSetMetaData rsmd3 = rs3.getMetaData();
-								
-								System.out.printf("RS: %s",rs);
-						%>
-			<h2>
-			Query 3
-			</h2>
-			<table>
-			<my:PrintTable rsmd="<%=rsmd3%>" rs="<%=rs3%>"/>
-			</table>
-			
-			<%
-							//Second Image
-							}
-							catch(Exception r){
-								out.print(r);
-							}
-								}
+				
+							
 									//Graph.Files = null;
 									connection.close();
 									if(st!=null){

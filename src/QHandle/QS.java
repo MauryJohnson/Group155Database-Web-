@@ -258,11 +258,32 @@ public class QS {
 					"";
 		}
 		else if(type==5) {
-			
+			ret+="SELECT DISTINCT T.bar,T.drinker,\r\n" + 
+					"(\r\n" + 
+					"(\r\n" + 
+					"SELECT SUM(T2.price) FROM beer_transactions T2\r\n" + 
+					"WHERE T.bar=T2.bar AND T.drinker = T2.drinker\r\n" + 
+					")\r\n" + 
+					"+\r\n" + 
+					"(\r\n" + 
+					"SELECT SUM(T2.price) FROM food_transactions T2\r\n" + 
+					"WHERE T.bar=T2.bar AND T.drinker = T2.drinker\r\n" + 
+					")\r\n" + 
+					"+\r\n" + 
+					"(\r\n" + 
+					"SELECT SUM(T2.price) FROM soft_drink_transactions T2\r\n" + 
+					"WHERE T.bar=T2.bar AND T.drinker = T2.drinker\r\n" + 
+					") \r\n" + 
+					")\r\n" + 
+					"AS AllSpending\r\n" + 
+					"FROM beer_transactions T\r\n" + 
+					"";
+		}
+		else if(type==6) {
+			ret+="";
 			
 			
 		}
-		
 		
 		return ret;
 	}
