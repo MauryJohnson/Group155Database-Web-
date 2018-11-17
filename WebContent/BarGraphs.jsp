@@ -87,7 +87,7 @@
 						rsmd = rs.getMetaData();
 						
 						%>
-						<my:SetGraph setQry="<%=qry%>" setTitle="Bar1" setCategory="Transactions for Months of Year" setXLabel="Consumables" setYLabel="Price" setRsmd="<%=rsmd%>" setRs="<%=rs%>" setType="2"/>
+						<my:SetGraph setQry="<%=qry%>" setTitle="Bar2" setCategory="Transactions for Months of Year" setXLabel="Consumables" setYLabel="Price" setRsmd="<%=rsmd%>" setRs="<%=rs%>" setType="2"/>
 						<my:PrintGraph setType="1"/>
 						<%
 						
@@ -102,11 +102,24 @@
 						rsmd = rs.getMetaData();
 						
 						%>
-						<my:SetGraph setQry="<%=qry%>" setTitle="Bar1" setCategory="Transactions for Months of Year" setXLabel="Consumables" setYLabel="Price" setRsmd="<%=rsmd%>" setRs="<%=rs%>" setType="3"/>
+						<my:SetGraph setQry="<%=qry%>" setTitle="Bar3" setCategory="Transactions for Months of Year" setXLabel="Consumables" setYLabel="Price" setRsmd="<%=rsmd%>" setRs="<%=rs%>" setType="3"/>
 						<my:PrintGraph setType="2"/>
 						<%
 						
+						Statement st4 = connection.createStatement();
 						
+						qry = QS.SetQuery(Bar,8);
+						
+						//Gets last result set
+						
+						rs = st4.executeQuery(qry);
+						
+						rsmd = rs.getMetaData();
+						
+						%>
+						<my:SetGraph setQry="<%=qry%>" setTitle="Bar4" setCategory="Transactions for Months of Year" setXLabel="Consumables" setYLabel="Price" setRsmd="<%=rsmd%>" setRs="<%=rs%>" setType="4"/>
+						<my:PrintGraph setType="3"/>
+						<%	
 						
 						
 						}catch(Exception r){

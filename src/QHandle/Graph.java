@@ -156,7 +156,7 @@ public class Graph {
 			
 		}
 		//String,String,Value
-		if(type==2) {
+		if(type==2||type==4) {
 			
 			Hashtable<String,double[]> H = new Hashtable<String,double[]>();
 			LinkedList<String>Keys=new LinkedList<String>();
@@ -308,9 +308,13 @@ public class Graph {
 					if(Type<2) {
 					dataset.addValue(Data[j][k], XGroupsLabels.get(j), XCategories.get(k));
 					}
-					else if(Type<5){
+					else if(Type<3){
 						System.out.printf("XCat: %s\n", XCategories.get(k));
 						dataset.addValue(Data[j][k], Graph.Keys.get(j).split("\n")[1], XCategories.get(k).split(",")[0]);	
+					}
+					else if(Type==4) {
+						System.out.printf("XCat: %s\n", XCategories.get(k));
+						dataset.addValue(Data[j][k], Graph.Keys.get(j).split("\n")[0]+","+Graph.Keys.get(j).split("\n")[1], XCategories.get(k).split(",")[0] + "-" + Graph.Keys.get(Graph.Keys.size()-1).split("\n")[0]);	
 					}
 					else {
 						System.out.printf("XCat: %s\n", XCategories.get(k));

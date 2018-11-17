@@ -324,7 +324,28 @@ public class QS {
 					"";
 			
 		}
-		
+		else if(type==8) {
+			ret+="#Time distribution of sales, THIS WILL BE BAR CHART\r\n" + 
+					"#OF THESE TIMES...\r\n" + 
+					"#THE time distribution of sales for this BAR\r\n" + 
+					"(\r\n" + 
+					"SELECT time_of_transaction,T.beer,T.price FROM beer_transactions T\r\n" + 
+					"WHERE T.bar=" + "\"" + Param + "\"" +
+					")\r\n" + 
+					"UNION\r\n" + 
+					"(\r\n" + 
+					"SELECT time_of_transaction,T.food,T.price FROM food_transactions T\r\n" + 
+					"WHERE T.bar=" + "\"" + Param + "\"" +
+					")\r\n" + 
+					"UNION\r\n" + 
+					"(\r\n" + 
+					"SELECT time_of_transaction,T.soft_drink,T.price FROM soft_drink_transactions T\r\n" + 
+					"WHERE T.bar=" + "\"" + Param + "\"" +
+					")\r\n" + 
+					"ORDER BY time_of_transaction ASC\r\n" + 
+					"";
+			
+		}
 		return ret;
 	}
 	
