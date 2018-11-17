@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.mysql.cj.protocol.Resultset;
+
 import java.io.*;
 import java.sql.*;
 
@@ -278,11 +280,48 @@ public class QS {
 					"AS AllSpending\r\n" + 
 					"FROM beer_transactions T\r\n" + 
 					"WHERE T.bar=" + "\"" + Param + "\""
-					+ "\r\nORDER BY AllSpending ASC";
+					+ "\r\nORDER BY AllSpending DESC";
 		}
 		else if(type==6) {
-			ret+="";
-			
+			ret+="SET @SameBeer:='0';\r\n" + 
+					"SELECT DISTINCT T.bar,T.beer,@SameBeer FROM beer_transactions T\r\n" + 
+					"\r\n" + 
+					"\r\n" + 
+					"WHERE \r\n" + 
+					"\r\n" + 
+					"\r\n" + 
+					"T.bar = " + "\"" + Param + "\"" + "\r\n" + 
+					"\r\n" + 
+					"AND\r\n" + 
+					"\r\n" + 
+					"(SELECT @SameBeer:=COUNT(*) FROM beer_transactions T2\r\n" + 
+					"WHERE T.bar=T2.bar AND T2.beer=T.beer\r\n" + 
+					")\r\n" + 
+					"\r\n" + 
+					"ORDER BY @SameBeer DESC\r\n" + 
+					"";
+		}
+		else if(type==7) {
+			ret+="SET @SameBeer:=0;\r\n" + 
+					"SET @Manf:='0';\r\n" + 
+					"SET @Beer:='0';\r\n" + 
+					"\r\n" + 
+					"SELECT DISTINCT T.bar,T.beer,@SameBeer,@Manf FROM beer_transactions T\r\n" + 
+					"WHERE \r\n" + 
+					"T.bar = " + "\"" + Param + "\"" + "\r\n" + 
+					"AND(\r\n" + 
+					"#Hack to set variables to desired results\r\n" + 
+					"(SELECT @SameBeer:=COUNT(*) FROM beer_transactions T2\r\n" + 
+					"WHERE T.bar=T2.bar AND T2.beer=T.beer\r\n" + 
+					")\r\n" + 
+					"+\r\n" + 
+					"(\r\n" + 
+					"SELECT @Manf:=B.manf FROM beers B\r\n" + 
+					"WHERE B.name=T.beer\r\n" + 
+					")\r\n" + 
+					")#########################################\r\n" + 
+					"ORDER BY @SameBeer DESC\r\n" + 
+					"";
 			
 		}
 		
@@ -322,10 +361,54 @@ public class QS {
 	    return s.substring(s.indexOf("/*")+2, s.indexOf("*/"));
 	}
 
+	public static ResultSet ReadQueryResults(Statement stmt,String qry,int Type) throws SQLException {
+		
+		boolean hasMoreResultSets = stmt.execute(qry);
+		
+		ResultSet rs = null;
+		
+		int Count = 0;
+		
+		 while ( hasMoreResultSets || stmt.getUpdateCount() != -1 ) {  
+		        if ( hasMoreResultSets ) {  
+		            rs = stmt.getResultSet();
+		            if(Type==0) {
+		            	if(Count==1) {
+		            		return rs;
+		            	}
+		            }
+		            if(Type==1) {
+		            	if(Count==3) {
+		            		return rs;
+		            	}
+		            }
+		            // handle your rs here
+		        } // if has rs
+		        else { // if ddl/dml/...
+		            int queryResult = stmt.getUpdateCount();  
+		            if ( queryResult == -1 ) { // no more queries processed  
+		                break;  
+		            } // no more queries processed  
+		            // handle success, failure, generated keys, etc here
+		        } // if ddl/dml/...
+
+		        Count+=1;
+		        
+		        // check to continue in the loop  
+		        hasMoreResultSets = stmt.getMoreResults();  
+		    } // while results
+		
+		if(rs==null) {
+			System.out.println("READ MULTI QUERY ERROR!!!!!!!!!!");
+			System.exit(-1);
+		}
+		return rs;
+	}
+	
 	public static Connection GetConnection() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver"); 
-		    String connectionURL = "jdbc:mysql://bar-beer-drinker-plus.cqyzjclyvard.us-east-2.rds.amazonaws.com:3306/BBDP";
+		    String connectionURL = "jdbc:mysql://bar-beer-drinker-plus.cqyzjclyvard.us-east-2.rds.amazonaws.com:3306/BBDP?allowMultiQueries=true";
 		    Connection connection = null; 
 		    connection = DriverManager.getConnection(connectionURL, "TestUser", "TestUser");
 			return connection;

@@ -62,6 +62,7 @@
 
 						String qry = QS.SetQuery(Bar, 5);
 						rs = st.executeQuery(qry);
+			
 						rsmd = rs.getMetaData();	
 						
 						if (qry == "") {
@@ -74,7 +75,40 @@
 						<my:SetGraph setQry="<%=qry%>" setTitle="Bar1" setCategory="Transactions for Months of Year" setXLabel="Consumables" setYLabel="Price" setRsmd="<%=rsmd%>" setRs="<%=rs%>" setType="2"/>
 						<my:PrintGraph setType="0"/>
 						<%
-				
+						
+						Statement st2 = connection.createStatement();
+						
+						qry = QS.SetQuery(Bar,6);
+						
+						//Gets last result set
+						
+						rs = QS.ReadQueryResults(st2,qry,0);
+						
+						rsmd = rs.getMetaData();
+						
+						%>
+						<my:SetGraph setQry="<%=qry%>" setTitle="Bar1" setCategory="Transactions for Months of Year" setXLabel="Consumables" setYLabel="Price" setRsmd="<%=rsmd%>" setRs="<%=rs%>" setType="2"/>
+						<my:PrintGraph setType="1"/>
+						<%
+						
+						Statement st3 = connection.createStatement();
+						
+						qry = QS.SetQuery(Bar,7);
+						
+						//Gets last result set
+						
+						rs = QS.ReadQueryResults(st3,qry,1);
+						
+						rsmd = rs.getMetaData();
+						
+						%>
+						<my:SetGraph setQry="<%=qry%>" setTitle="Bar1" setCategory="Transactions for Months of Year" setXLabel="Consumables" setYLabel="Price" setRsmd="<%=rsmd%>" setRs="<%=rs%>" setType="3"/>
+						<my:PrintGraph setType="2"/>
+						<%
+						
+						
+						
+						
 						}catch(Exception r){
 							System.err.println(r);
 							out.println(r);
