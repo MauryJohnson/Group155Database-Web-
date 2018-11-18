@@ -122,7 +122,6 @@ public class QS {
 					")\r\n" + 
 					"AS T\r\n" + 
 					"ORDER BY bar,date_of_transaction,time_of_transaction"
-					+" LIMIT 10";
 					;
 		}
 		else if(type==1) {
@@ -195,7 +194,7 @@ public class QS {
 					"END\r\n" + 
 					"AS DOW\r\n" + 
 					" FROM beer_transactions T\r\n" + 
-					"WHERE T.drinker = \"Aimee Curtis\"\r\n" + 
+					"WHERE T.drinker =" + "\"" + Param + "\"" + "\r\n" + 
 					"ORDER BY FIELD(DOW, 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY')\r\n" + 
 					")\r\n" + 
 					"UNION\r\n" + 
@@ -219,7 +218,7 @@ public class QS {
 					"END\r\n" + 
 					"AS DOW\r\n" + 
 					" FROM food_transactions T\r\n" + 
-					"WHERE T.drinker = \"Aimee Curtis\"\r\n" + 
+					"WHERE T.drinker =" + "\"" + Param + "\"" + "\r\n" + 
 					"ORDER BY FIELD(DOW, 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY')\r\n" + 
 					")\r\n" + 
 					"UNION(\r\n" + 
@@ -242,7 +241,7 @@ public class QS {
 					"END\r\n" + 
 					"AS DOW\r\n" + 
 					" FROM soft_drink_transactions T\r\n" + 
-					"WHERE T.drinker = \"Aimee Curtis\"\r\n" + 
+					"WHERE T.drinker =" + "\"" + Param + "\"" + "\r\n" + 
 					"ORDER BY FIELD(DOW, 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY')\r\n" + 
 					")\r\n" + 
 					"ORDER BY bar,FIELD(DOW, 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY')\r\n" + 
@@ -251,15 +250,15 @@ public class QS {
 		}
 		else if(type==4) {
 			ret+="(SELECT T.bar,T.drinker,T.beer,T.price,MONTH(T.date_of_transaction) AS MOY FROM beer_transactions T\r\n" + 
-					"WHERE T.drinker=\"Aimee Curtis\"\r\n" + 
+					"WHERE T.drinker =" + "\"" + Param + "\"" + "\r\n" + 
 					")\r\n" + 
 					"UNION(\r\n" + 
 					"SELECT T.bar,T.drinker,T.food,T.price,MONTH(T.date_of_transaction) AS MOY FROM food_transactions T\r\n" + 
-					"WHERE T.drinker=\"Aimee Curtis\"\r\n" + 
+					"WHERE T.drinker =" + "\"" + Param + "\"" + "\r\n" + 
 					")\r\n" + 
 					"UNION(\r\n" + 
 					"SELECT T.bar,T.drinker,T.soft_drink,T.price,MONTH(T.date_of_transaction) AS MOY FROM soft_drink_transactions T\r\n" + 
-					"WHERE T.drinker=\"Aimee Curtis\"\r\n" + 
+					"WHERE T.drinker =" + "\"" + Param + "\"" + "\r\n" + 
 					")\r\n" + 
 					"ORDER BY bar,MOY\r\n" + 
 					"";
@@ -517,6 +516,50 @@ public class QS {
 					"\r\n" + 
 					"#O(2n) To get case for each hour  Hashtable insert, Hashtable iteration\r\n" + 
 					"ORDER BY MaxTimeWindowOccurrence DESC\r\n" + 
+					"";
+		}
+		else if(type==10) {
+			ret+="#Set of maximum bought beers in all bars\r\n" + 
+					"SELECT DISTINCT T.bar,T.beer,\r\n" + 
+					"(\r\n" + 
+					"SELECT COUNT(*) FROM beer_transactions T2\r\n" + 
+					"WHERE T2.beer=T.beer AND T2.bar=T.bar\r\n" + 
+					")\r\n" + 
+					"AS CountOcc\r\n" + 
+					"FROM beer_transactions T\r\n" + 
+					"WHERE T.beer=" + "\"" + Param + "\"" + "\r\n" + 
+					"ORDER BY CountOcc DESC\r\n" + 
+					"";
+		}
+		else if(type==11) {
+			ret+="#Set of maximum bought beers in all bars\r\n" + 
+					"SELECT DISTINCT T.drinker,\r\n" + 
+					"\r\n" + 
+					"(\r\n" + 
+					"SELECT COUNT(*) FROM beer_transactions T2\r\n" + 
+					"WHERE T2.beer=T.beer AND T2.bar=T.bar AND HOUR(T2.time_of_transaction)=HOUR(T.time_of_transaction)\r\n" + 
+					"AND T2.drinker = T.drinker\r\n" + 
+					")\r\n" + 
+					"\r\n" + 
+					"AS CountOcc\r\n" + 
+					"FROM beer_transactions T\r\n" + 
+					"WHERE T.beer=" + "\"" + Param + "\"" + "\r\n" + 
+					"ORDER BY CountOcc DESC\r\n" + 
+					"";
+		}
+		else if(type==12) {
+			ret+="#Set of maximum bought beers in all bars\r\n" + 
+					"SELECT DISTINCT HOUR(T.time_of_transaction),\r\n" + 
+					"\r\n" + 
+					"(\r\n" + 
+					"SELECT COUNT(*) FROM beer_transactions T2\r\n" + 
+					"WHERE T2.beer=T.beer AND T2.bar=T.bar AND HOUR(T2.time_of_transaction)=HOUR(T.time_of_transaction)\r\n" + 
+					")\r\n" + 
+					"\r\n" + 
+					"AS CountOcc\r\n" + 
+					"FROM beer_transactions T\r\n" + 
+					"WHERE T.beer=" + "\"" + Param + "\"" + "\r\n" + 
+					"ORDER BY T.time_of_transaction,CountOcc DESC\r\n" + 
 					"";
 		}
 		return ret;

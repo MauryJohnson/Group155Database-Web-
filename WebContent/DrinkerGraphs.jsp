@@ -27,7 +27,8 @@
 		<header>
 			<nav>
 
-				<a href="index.jsp" class="selected">Home</a> <a href="Drinker.jsp">Drinker</a>
+				<a href="index.jsp" class="selected">Home</a> 
+				<a href="Drinker.jsp">Drinker</a>
 				<a href="Bar.jsp">Bar</a> <a href="Beer.jsp">Beer</a>
 				<a href="Modification.jsp">Modification</a> 
 				<a
