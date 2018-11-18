@@ -26,7 +26,7 @@
 				<a href="Modification.jsp">Modification</a>
 				<a href="Give Query.jsp">MySQL Query</a>
 		</nav>
-		<h1 class="clearfix"><a href="#">Query Details</a></h1>
+		<h3 class="clearfix"><a href="#">Query Details</a></h3>
 	</header>
 </div>
 
@@ -58,7 +58,7 @@ try {
     	System.out.printf("\nTABEL GOT: %s\n",Table);
     	
     	
-    	QS.ValidateModification(qry,Table);
+    	int Valid = QS.ValidateModification(qry,Table);
     	
     	/*
 		ip = QS.GetIp(ip,request);
@@ -77,10 +77,35 @@ try {
     	<my:IpSession qry = "<%= qry %>" />
     	<% 
     	
-    	rs = st.executeQuery(qry);
+    	if(Valid>0){
+    	
+    		
+			rs = QS.ReadQueryResults(st,qry,-1);
+				
+    		
+    	//rs = st.executeQuery(qry);
     	
     	if(rs==null){
-    		out.println("Unable to get result from query");
+    		%>
+    		<tr>
+    		<td>
+    		<%
+    		if(Valid==1){
+    	    	out.println("Successful Update on");
+    	    	out.println(Table);
+    	    	}
+    	    	else if(Valid==2){
+    	    		out.println("Successful Insert on");
+    	        	out.println(Table);
+    	    	}
+    	    	else if(Valid==3){
+    	    		out.println("Successful Delete on");
+    	        	out.println(Table);
+    	    	}
+    		%>
+    		</td>
+    		</tr>
+    		<% 
     	}
     	else{
     	
@@ -89,10 +114,23 @@ try {
     	out.println("\n");
     	
     	%>
-    	<my:PrintTable rsmd="<%= rsmd %>" rs="<%= rs %>" />
+    	
+    	<%
+    	
+    	%>
     	<% 
     	
-    	}//Result
+    	}
+    	}
+    	else{
+    		%>
+    		
+    		
+    		<tr><td><%out.println("Invalid Update/Insert/Delete For Table:"); out.println(Table);%></td></tr>
+    		
+    		
+    		<%//Result
+    	}
  
     }//Conn
     connection.close();

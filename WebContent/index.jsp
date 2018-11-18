@@ -1,3 +1,8 @@
+<%@ page import="java.sql.*" %> 
+<%@ page import="java.io.*" %> 
+<%@ page import="java.util.*" %>
+<%@ page import= "QHandle.*" %>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE HTML>
@@ -30,12 +35,41 @@
 				<a href="Give Query.jsp">MySQL Query</a>
 			
 		</nav>
-		<h1 class="clearfix"><a href="#">Group 155 Database</a></h1>
+		<h1 class="clearfix"><a href="#">Welcome to Group 155 Database</a></h1>
 	</header>
 </div>
+	<% 
+	Connection connection = QS.GetConnection();
+	
+	Graph.Files=null;
+	Graph.Files=new LinkedList<String>();
+	
+	if (connection != null) {
 
+		try{
+			
+			String qry = QS.SetQuery("AHAHA", 13);
+			System.out.printf("\nQUERY:%s",qry);
+			Statement st = connection.createStatement();
+			ResultSet rs = st.executeQuery(qry);
+			ResultSetMetaData rsmd = rs.getMetaData();
+			
+			%>
+			<h2></h2>
+			<table>
+				<my:PrintTable rsmd="<%=rsmd%>" rs="<%=rs%>" />
+			</table>
+			<%
+		}
+		catch(Exception e){
+			System.out.println(e);
+			out.println(e);
+		}
+	}
+	else{
+		out.println("CONNECTION FAILED");
+	}
 
-
-
+	%>
 </body>
 </html>

@@ -119,6 +119,7 @@
 						
 						rsmd = rs.getMetaData();
 						
+						
 						%>
 						<my:SetGraph setQry="<%=qry%>" setTitle="Bar4" setCategory="Transactions for Months of Year" setXLabel="Consumables" setYLabel="Price" setRsmd="<%=rsmd%>" setRs="<%=rs%>" setType="4"/>
 						<my:PrintGraph setType="3"/>
@@ -134,8 +135,10 @@
 						
 						rsmd = rs.getMetaData();
 						
+						Bar+= "Time Distribution of sales in "+ Bar;
+						
 						%>
-						<my:SetGraph setQry="<%=qry%>" setTitle="Bar5" setCategory="Transactions for Months of Year" setXLabel="Consumables" setYLabel="Price" setRsmd="<%=rsmd%>" setRs="<%=rs%>" setType="4"/>
+						<my:SetGraph setQry="<%=qry%>" setTitle= "<%=Bar%>" setCategory="Time Distribution of Sales" setXLabel="Consumables" setYLabel="Price" setRsmd="<%=rsmd%>" setRs="<%=rs%>" setType="4"/>
 						<my:PrintGraph setType="4"/>
 						<%
 						

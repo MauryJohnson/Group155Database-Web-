@@ -16,6 +16,6 @@
 			
 		
 			%>
-			<img src=<%=F%> BORDER="0" USEMAP="#chart">
+			<img src="<%=F%>" BORDER="0" USEMAP="#chart">
 			<%
 			%>

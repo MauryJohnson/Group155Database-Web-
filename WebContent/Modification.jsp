@@ -45,7 +45,7 @@
     <form action="UpdateResults.jsp" method="GET">
     <h1>
     <textarea class="myTextarea" name = "Mod"><%try{if((String)sess.getAttribute(ip)!=null){out.print((String)sess.getAttribute(ip));}else{/*out.print("");*/}}catch(Exception e){}%></textarea>
-    <input type="hidden" name ="query" value="Bar"/>
+    <input type="hidden" name ="query" value="bars"/>
     <input type="submit" name ="submit" value="Send" onclick = "{document.frm.hdnbt.value=this.value;document.frm.submit();}"> 
 	</h1>
     </form>
@@ -55,7 +55,7 @@
  	<form action="UpdateResults.jsp" method="GET">
     <h1>
     <textarea class="myTextarea" name = "Mod"><%try{if((String)sess.getAttribute(ip)!=null){out.print((String)sess.getAttribute(ip));}else{/*out.print("");*/}}catch(Exception e){}%></textarea>
-    <input type="hidden" name ="query" value="Beer"/><input type="submit" name ="submit" value="Send" onclick = "{document.frm.hdnbt.value=this.value;document.frm.submit();}"> 
+    <input type="hidden" name ="query" value="beers"/><input type="submit" name ="submit" value="Send" onclick = "{document.frm.hdnbt.value=this.value;document.frm.submit();}"> 
 	</h1>
     </form>
 
@@ -64,7 +64,7 @@
 	<form action="UpdateResults.jsp" method="GET">
     <h1>
     <textarea class="myTextarea" name = "Mod"><%try{if((String)sess.getAttribute(ip)!=null){out.print((String)sess.getAttribute(ip));}else{/*out.print("");*/}}catch(Exception e){}%></textarea>
-    <input type="hidden" name ="query" value="Drinker"/><input type="submit" name ="submit" value="Send" onclick = "{document.frm.hdnbt.value=this.value;document.frm.submit();}"> 
+    <input type="hidden" name ="query" value="drinkers"/><input type="submit" name ="submit" value="Send" onclick = "{document.frm.hdnbt.value=this.value;document.frm.submit();}"> 
 	</h1>
     </form>
     
@@ -73,7 +73,7 @@
     <form action="UpdateResults.jsp" method="GET">
     <h1>
     <textarea class="myTextarea" name = "Mod"><%try{if((String)sess.getAttribute(ip)!=null){out.print((String)sess.getAttribute(ip));}else{/*out.print("");*/}}catch(Exception e){}%></textarea>
-    <input type="hidden" name ="query" value = "Frequents"/>Frequents<input type="submit" name ="submit" value="Send" onclick = "{document.frm.hdnbt.value=this.value;document.frm.submit();}"> 
+    <input type="hidden" name ="query" value = "frequents"/>Frequents<input type="submit" name ="submit" value="Send" onclick = "{document.frm.hdnbt.value=this.value;document.frm.submit();}"> 
 	</h1>
     </form>
     
@@ -82,7 +82,7 @@
     <form action="UpdateResults.jsp" method="GET">
     <h1>
     <textarea class="myTextarea" name = "Mod"><%try{if((String)sess.getAttribute(ip)!=null){out.print((String)sess.getAttribute(ip));}else{/*out.print("");*/}}catch(Exception e){}%></textarea>
-    <input type="hidden" name ="query" value="Likes"/>	
+    <input type="hidden" name ="query" value="likes"/>	
     
 	 <input type="submit" name ="submit" value="Send" onclick = "{document.frm.hdnbt.value=this.value;document.frm.submit();}"> 
 	</h1>
@@ -93,7 +93,7 @@
     <form action="UpdateResults.jsp" method="GET">
     <h1>
     <textarea class="myTextarea" name = "Mod"><%try{if((String)sess.getAttribute(ip)!=null){out.print((String)sess.getAttribute(ip));}else{/*out.print("");*/}}catch(Exception e){}%></textarea>
-    <input type="hidden" name ="query" value="FoodSells"/>	
+    <input type="hidden" name ="query" value="food_sells"/>	
     
 	 <input type="submit" name ="submit" value="Send" onclick = "{document.frm.hdnbt.value=this.value;document.frm.submit();}"> 
 	</h1>
@@ -104,7 +104,7 @@
     <form action="UpdateResults.jsp" method="GET">
     <h1>
     <textarea class="myTextarea" name = "Mod"><%try{if((String)sess.getAttribute(ip)!=null){out.print((String)sess.getAttribute(ip));}else{/*out.print("");*/}}catch(Exception e){}%></textarea>
-    <input type="hidden" name ="query" value="BeerSells"/>	
+    <input type="hidden" name ="query" value="beer_sells"/>	
     
 	 <input type="submit" name ="submit" value="Send" onclick = "{document.frm.hdnbt.value=this.value;document.frm.submit();}"> 
 	</h1>
@@ -115,7 +115,7 @@
     <form action="UpdateResults.jsp" method="GET">
     <h1>
     <textarea class="myTextarea" name = "Mod"><%try{if((String)sess.getAttribute(ip)!=null){out.print((String)sess.getAttribute(ip));}else{/*out.print("");*/}}catch(Exception e){}%></textarea>
-    <input type="hidden" name ="query" value="SoftDrinkSells"/>	
+    <input type="hidden" name ="query" value="soft_drink_sells"/>	
     
 	 <input type="submit" name ="submit" value="Send" onclick = "{document.frm.hdnbt.value=this.value;document.frm.submit();}"> 
 	</h1>
@@ -126,7 +126,7 @@
     <form action="UpdateResults.jsp" method="GET">
     <h1>
     <textarea class="myTextarea" name = "Mod"><%try{if((String)sess.getAttribute(ip)!=null){out.print((String)sess.getAttribute(ip));}else{/*out.print("");*/}}catch(Exception e){}%></textarea>
-    <input type="hidden" name ="query" value="FoodTransactions"/>	
+    <input type="hidden" name ="query" value="food_transactions"/>	
     
 	 <input type="submit" name ="submit" value="Send" onclick = "{document.frm.hdnbt.value=this.value;document.frm.submit();}"> 
 	</h1>
@@ -137,7 +137,7 @@
     <form action="UpdateResults.jsp" method="GET">
     <h1>
     <textarea class="myTextarea" name = "Mod"><%try{if((String)sess.getAttribute(ip)!=null){out.print((String)sess.getAttribute(ip));}else{/*out.print("");*/}}catch(Exception e){}%></textarea>
-    <input type="hidden" name ="query" value="BeerTransactions"/>	
+    <input type="hidden" name ="query" value="beer_transactions"/>	
     
 	 <input type="submit" name ="submit" value="Send" onclick = "{document.frm.hdnbt.value=this.value;document.frm.submit();}"> 
 	</h1>
@@ -148,7 +148,7 @@
     <form action="UpdateResults.jsp" method="GET">
     <h1>
     <textarea class="myTextarea" name = "Mod"><%try{if((String)sess.getAttribute(ip)!=null){out.print((String)sess.getAttribute(ip));}else{/*out.print("");*/}}catch(Exception e){}%></textarea>
-    <input type="hidden" name ="query" value="SoftDrinkTransactions"/>	
+    <input type="hidden" name ="query" value="soft_drink_transactions"/>	
     
 	 <input type="submit" name ="submit" value="Send" onclick = "{document.frm.hdnbt.value=this.value;document.frm.submit();}"> 
 	</h1>

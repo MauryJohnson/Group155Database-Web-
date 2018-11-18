@@ -205,6 +205,57 @@ public class Graph {
 				e.printStackTrace();
 			}
 		}
+		if(type==5) {
+			Hashtable<String,double[]> H = new Hashtable<String,double[]>();
+			LinkedList<String>Keys=new LinkedList<String>();
+			
+			try {
+				while(rs.next()) {
+						if(H.get(rs.getString(1))==null){
+							H.put(ExpandRS(rs,new int[] {1,2}),new double[] {Double.parseDouble(rs.getString(3))});
+							Keys.add(ExpandRS(rs,new int[] {1,2}));
+						}
+						//Old push, increase occurence count, shouldn't happen with Bar,cons,drinker,day->price....
+						else {
+							H.get(ExpandRS(rs,new int[] {1,2}));
+						}
+				}
+				
+				//Set values to be used for coloring
+				SetDXG(D,H,Keys,XCategory,XGroupsLabels,4);
+			
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		if(type==6) {
+			Hashtable<String,double[]> H = new Hashtable<String,double[]>();
+			LinkedList<String>Keys=new LinkedList<String>();
+			
+			try {
+				while(rs.next()) {
+						if(H.get(rs.getString(1)+"\n")==null){
+							H.put(ExpandRS(rs,new int[] {1}),new double[] {Double.parseDouble(rs.getString(2))});
+							Keys.add(ExpandRS(rs,new int[] {1}));
+						}
+						//Old push, increase occurence count, shouldn't happen with Bar,cons,drinker,day->price....
+						else {
+							if((Double.parseDouble(rs.getString(2))>H.get(rs.getString(1)+"\n")[0])){
+							H.get(ExpandRS(rs,new int[] {1}));
+							H.put(rs.getString(1)+"\n", new double[] {Double.parseDouble(rs.getString(2))});
+							}
+						}
+				}
+				
+				//Set values to be used for coloring
+				SetDXG(D,H,Keys,XCategory,XGroupsLabels,4);
+			
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
 		return ToD(D);
 	}
@@ -305,8 +356,8 @@ public class Graph {
 				//For each category, ex beer,food,soft_d
 				for(int k=0; k<XCategories.size()&&k<Data[j].length;k+=1) {
 					//if(Type==0) {
-					if(Type<2) {
-					dataset.addValue(Data[j][k], XGroupsLabels.get(j), XCategories.get(k));
+					if(Type<2||Type==5) {
+					dataset.addValue(Data[j][k], XGroupsLabels.get(j), XCategories.get(k).split("\n")[0] + "-" + Graph.Keys.get(Graph.Keys.size()-1).split("\n")[0]);
 					}
 					else if(Type<3){
 						System.out.printf("XCat: %s\n", XCategories.get(k));
@@ -315,6 +366,11 @@ public class Graph {
 					else if(Type==4) {
 						System.out.printf("XCat: %s\n", XCategories.get(k));
 						dataset.addValue(Data[j][k], Graph.Keys.get(j).split("\n")[0]+","+Graph.Keys.get(j).split("\n")[1], XCategories.get(k).split(",")[0] + "-" + Graph.Keys.get(Graph.Keys.size()-1).split("\n")[0]);	
+					}
+					else if(Type==6) {
+						System.out.printf("XCat: %s\n", XCategories.get(k));
+						//dataset.addValue(Data[j][k], Graph.Keys.get(j).split("\n")[0], XCategories.get(k).split(",")[0] + "-" + Graph.Keys.get(Graph.Keys.size()-1).split("\n")[0]);	
+						dataset.addValue(Data[j][k], Graph.Keys.get(j)+"\n", XCategories.get(k).split("\n")[0] + "-" + Graph.Keys.get(Graph.Keys.size()-1).split("\n")[0]);
 					}
 					else {
 						System.out.printf("XCat: %s\n", XCategories.get(k));

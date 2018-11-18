@@ -50,6 +50,9 @@ href="Give Query.jsp">MySQL Query</a>
 						Statement st = connection.createStatement();
 						ResultSet rs = null;
 
+						Graph.Files=null;
+						Graph.Files=new LinkedList<String>();
+						
 						String Beer = (String) request.getParameter("Beer1");
 						//Add drinker name to query
 
@@ -65,13 +68,43 @@ href="Give Query.jsp">MySQL Query</a>
 			<h2><%=Beer%></h2>
 			<%
 				try{
+					
+				//First Image
 					String qry = QS.SetQuery(Beer, 10);
 					rs = st.executeQuery(qry);
 					ResultSetMetaData rsmd = rs.getMetaData();
 					
-					
+					%>
+					<my:SetGraph setQry="<%=qry%>" setTitle="<%="Bars Where "+Beer+" Sells the Most" %>" setCategory="Most Beer Sells in Bars" setXLabel="Beers" setYLabel="Frequency" setRsmd="<%=rsmd%>" setRs="<%=rs%>" setType="5" />
+					<my:PrintGraph setType="0"/>
+					<% 
 				//First Image
+				
+				//Second Image
+					qry = QS.SetQuery(Beer,11);
+					rs = st.executeQuery(qry);
+					rsmd = rs.getMetaData();
+				
+					%>
+					<my:SetGraph setQry="<%=qry%>" setTitle="<%="Drinkers who are the biggest consumers of "+Beer%>" setCategory="Biggest Consumers" setXLabel="Drinkers" setYLabel="Frequency" setRsmd="<%=rsmd%>" setRs="<%=rs%>" setType="6" />
+					<my:PrintGraph setType="1"/>
+					<%
+					
+				//Second Image
 			
+				//Third Image
+					qry = QS.SetQuery(Beer,12);
+					rs = st.executeQuery(qry);
+					rsmd = rs.getMetaData();
+				
+					%>
+					<my:SetGraph setQry="<%=qry%>" setTitle="<%="Time distribution of Where "+Beer+" Sells the Most"%>" setCategory="Time Distribution" setXLabel="Time" setYLabel="Frequency" setRsmd="<%=rsmd%>" setRs="<%=rs%>" setType="6" />
+					<my:PrintGraph setType="2"/>
+					<%
+					
+					
+				//Third Image
+				
 			}
 			catch(Exception r){
 				System.out.println(r);
