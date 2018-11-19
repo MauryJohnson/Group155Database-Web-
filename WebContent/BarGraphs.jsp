@@ -73,9 +73,11 @@
 						}
 						
 						try{
+						
+						String Title = "Largest Spenders of Drinkers for "+Bar;
 							
 						%>
-						<my:SetGraph setQry="<%=qry%>" setTitle="Bar1" setCategory="Transactions for Months of Year" setXLabel="Consumables" setYLabel="Price" setRsmd="<%=rsmd%>" setRs="<%=rs%>" setType="2"/>
+						<my:SetGraph setQry="<%=qry%>" setTitle="<%=Title%>" setCategory="Largest Spenders of Drinkers" setXLabel="Drinkers" setYLabel="Price Total" setRsmd="<%=rsmd%>" setRs="<%=rs%>" setType="2"/>
 						<my:PrintGraph setType="0"/>
 						<%
 						
@@ -89,8 +91,12 @@
 						
 						rsmd = rs.getMetaData();
 						
+						
+						Title = "Most Popular Beers for " +Bar; 
+						
+						
 						%>
-						<my:SetGraph setQry="<%=qry%>" setTitle="Bar2" setCategory="Transactions for Months of Year" setXLabel="Consumables" setYLabel="Price" setRsmd="<%=rsmd%>" setRs="<%=rs%>" setType="2"/>
+						<my:SetGraph setQry="<%=qry%>" setTitle="<%=Title%>" setCategory="Most Popular Beers" setXLabel="Beers" setYLabel="Frequency" setRsmd="<%=rsmd%>" setRs="<%=rs%>" setType="2"/>
 						<my:PrintGraph setType="1"/>
 						<%
 						
@@ -104,8 +110,11 @@
 						
 						rsmd = rs.getMetaData();
 						
+						Title = "Manufacturers selling the most beers for " +Bar; 
+						
+						
 						%>
-						<my:SetGraph setQry="<%=qry%>" setTitle="Bar3" setCategory="Transactions for Months of Year" setXLabel="Consumables" setYLabel="Price" setRsmd="<%=rsmd%>" setRs="<%=rs%>" setType="3"/>
+						<my:SetGraph setQry="<%=qry%>" setTitle="<%=Title%>" setCategory="Manufacturere Selling the Most Beers" setXLabel="Manufacturers" setYLabel="Frequency" setRsmd="<%=rsmd%>" setRs="<%=rs%>" setType="3"/>
 						<my:PrintGraph setType="2"/>
 						<%
 						
@@ -120,8 +129,11 @@
 						rsmd = rs.getMetaData();
 						
 						
+						Title = "Time Distribution of Sale for " +Bar; 
+						
+						
 						%>
-						<my:SetGraph setQry="<%=qry%>" setTitle="Bar4" setCategory="Transactions for Months of Year" setXLabel="Consumables" setYLabel="Price" setRsmd="<%=rsmd%>" setRs="<%=rs%>" setType="4"/>
+						<my:SetGraph setQry="<%=qry%>" setTitle="<%=Title%>" setCategory="Time Distribution of Sales" setXLabel="Time" setYLabel="Price" setRsmd="<%=rsmd%>" setRs="<%=rs%>" setType="4"/>
 						<my:PrintGraph setType="3"/>
 						<%	
 						
@@ -135,10 +147,10 @@
 						
 						rsmd = rs.getMetaData();
 						
-						Bar+= "Time Distribution of sales in "+ Bar;
+						Title= "Busiest Periods of Day for "+ Bar;
 						
 						%>
-						<my:SetGraph setQry="<%=qry%>" setTitle= "<%=Bar%>" setCategory="Time Distribution of Sales" setXLabel="Consumables" setYLabel="Price" setRsmd="<%=rsmd%>" setRs="<%=rs%>" setType="4"/>
+						<my:SetGraph setQry="<%=qry%>" setTitle= "<%=Title%>" setCategory="Busiest Periods of the Day" setXLabel="Consumables" setYLabel="Frequency" setRsmd="<%=rsmd%>" setRs="<%=rs%>" setType="4"/>
 						<my:PrintGraph setType="4"/>
 						<%
 						

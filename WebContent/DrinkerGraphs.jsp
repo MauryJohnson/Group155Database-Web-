@@ -131,7 +131,7 @@ href="Give Query.jsp">MySQL Query</a>
 			rs = st.executeQuery(qry);
 			rsmd = rs.getMetaData();
 			
-			Title = "Largest Spenders of Drinkers";
+			Title = "Transactions for Months of Year for " +Drinker;
 			
 			%>
 			<my:SetGraph setQry="<%=qry%>" setTitle="<%=Title%>" setCategory="Transactions for Months of Year" setXLabel="Consumables" setYLabel="Price" setRsmd="<%=rsmd%>" setRs="<%=rs%>" setType="1"/>
