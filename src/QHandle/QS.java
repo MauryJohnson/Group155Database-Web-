@@ -874,6 +874,95 @@ public class QS {
 		return ret;
 	}
 	
+	
+	//Check if it's an insert and on a transactions table!!
+	public static String NotATransaction(String qry) {
+		String app = "";
+		int j=0;
+		int LastPosition = 0;
+	
+		for(j=0;j<qry.length();j+=1) {
+			if((qry.substring(j, j+1).toCharArray())[0]!=' ') {
+				LastPosition = j;
+				break;
+			}
+		}
+		
+		String Func = "";
+		
+		for(int k=LastPosition;k<qry.length();k+=1) {
+			
+			if(Func.toLowerCase().equals("insert") ||!( (Character.isAlphabetic(qry.substring(k, k+1).toCharArray()[0]) )  )) {
+				LastPosition = k;
+				break;
+			}
+			else {
+				Func+=qry.substring(k, k+1);
+			}
+		}
+		System.out.printf("\nMY FUNC: %s\n", Func);
+		
+		/*
+		if(!Func.toLowerCase().equals("insert")) {
+			return null;
+		}
+		*/
+		
+		String MyPrm = "";
+
+		for(j=LastPosition;j<qry.length();j+=1) {
+			if((qry.substring(j, j+1).toCharArray())[0]!=' ') {
+				LastPosition = j;
+				break;
+			}
+		}
+		
+		for(int k=LastPosition;k<qry.length();k+=1) {
+			
+			if(MyPrm.toLowerCase().equals("into") ||!((Character.isAlphabetic(qry.substring(k, k+1).toCharArray()[0]))    )) {
+				LastPosition = k;
+				break;
+			}
+			else {
+				MyPrm+=qry.substring(k, k+1);
+			}
+		}
+		System.out.printf("\nMY PRM: %s\n", MyPrm);
+		
+		/*
+		if(!MyPrm.toLowerCase().equals("into")) {
+			return null;
+		}
+		*/
+		
+		for(j=LastPosition;j<qry.length();j+=1) {
+			if((qry.substring(j, j+1).toCharArray())[0]!=' ') {
+				LastPosition = j;
+				break;
+			}
+		}
+		
+		String MyTable = "";
+		
+		for(int k=LastPosition;k<qry.length();k+=1) {
+			
+			if((!(Character.isAlphabetic(qry.substring(k, k+1).toCharArray()[0]))   &&  !  (qry.substring(k,k+1).toCharArray()[0]=='_')   )) {
+				LastPosition = k;
+				break;
+			}
+			else {
+				MyTable+=qry.substring(k, k+1);
+			}
+		}
+		System.out.printf("\nMY TABLE: %s\n", MyTable);
+		if(!MyTable.equals("beer_transactions") && !MyTable.equals("food_transactions") && !MyTable.equals("soft_drink_transactions")) {
+			return null;
+		}
+		
+		
+		return MyTable;
+	}
+	
 	//Many queries to parse type from
 	public static String[] ParseType(String[]Queries, String Table) {
 		String [] Types = new String[Queries.length];
@@ -919,9 +1008,9 @@ public class QS {
 				}
 				
 				
-				for(int k=LastPosition;k<Queries[i].length()&&(Character.isAlphabetic(Queries[i].substring(k, k+1).toCharArray()[0]));k+=1) {
+				for(int k=LastPosition;k<Queries[i].length();k+=1) {
 					
-					if(MyTable.equals(Table) ||!(Character.isAlphabetic(Queries[i].substring(k, k+1).toCharArray()[0]))) {
+					if(MyTable.equals(Table) || (  !Character.isAlphabetic(Queries[i].substring(k, k+1).toCharArray()[0])  &&  !(Queries[i].substring(k,k+1).toCharArray()[0]=='_')   )) {
 						break;
 					}
 					else {
@@ -949,7 +1038,7 @@ public class QS {
 				for(int k=LastPosition;k<Queries[i].length()&&Queries[i].substring(k, k+1)!=" ";k+=1) {
 					System.out.print(Queries[i].substring(k, k+1));
 					MyExpr+=Queries[i].substring(k, k+1);
-					if(MyExpr.toLowerCase().equals("into") || !(Character.isAlphabetic(Queries[i].substring(k, k+1).toCharArray()[0]))) {
+					if(MyExpr.toLowerCase().equals("into") || !(Character.isAlphabetic(Queries[i].substring(k, k+1).toCharArray()[0]) )) {
 						LastPosition = k;
 						break;
 					}
@@ -968,10 +1057,10 @@ public class QS {
 				
 				
 				String MyTable = "";
-				for(int k=LastPosition;k<Queries[i].length()&&Queries[i].substring(k, k+1)!=" ";k+=1) {
+				for(int k=LastPosition;k<Queries[i].length();k+=1) {
 					System.out.print(Queries[i].substring(k, k+1));
 					MyTable+=Queries[i].substring(k, k+1);
-					if(MyTable.toLowerCase().equals(Table) || (!(Character.isAlphabetic(Queries[i].substring(k, k+1).toCharArray()[0])))) {
+					if(MyTable.toLowerCase().equals(Table) || (  !Character.isAlphabetic(Queries[i].substring(k, k+1).toCharArray()[0]) &&  ! (Queries[i].substring(k,k+1).toCharArray()[0]=='_') )   ) {
 						LastPosition = k;
 						break;
 					}
@@ -1014,9 +1103,9 @@ public class QS {
 				}
 				
 				
-				for(int k=LastPosition;k<Queries[i].length()&&Queries[i].substring(k, k+1)!=" ";k+=1) {
+				for(int k=LastPosition;k<Queries[i].length();k+=1) {
 					MyTable+=Queries[i].substring(k, k+1);
-					if(MyTable.toLowerCase().equals(Table) || !(Character.isAlphabetic(Queries[i].substring(k, k+1).toCharArray()[0]))) {
+					if(MyTable.toLowerCase().equals(Table) || ( !Character.isAlphabetic(Queries[i].substring(k, k+1).toCharArray()[0]) &&  !(Queries[i].substring(k,k+1).toCharArray()[0]=='_') )  ) {
 						LastPosition = k;
 						break;
 					}

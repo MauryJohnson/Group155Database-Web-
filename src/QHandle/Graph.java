@@ -356,7 +356,11 @@ public class Graph {
 				//For each category, ex beer,food,soft_d
 				for(int k=0; k<XCategories.size()&&k<Data[j].length;k+=1) {
 					//if(Type==0) {
-					if(Type<2||Type==5) {
+					if(Type==1) {
+						System.out.printf("XCat: %s\n", XCategories.get(k));
+						dataset.addValue(Data[j][k], Graph.Keys.get(j).split("\n")[0]+" , "+Graph.Keys.get(j).split("\n")[1]+" , "+Graph.Keys.get(j).split("\n")[2]+" , "+Graph.Keys.get(j).split("\n")[3], XCategories.get(k).split("\n")[3] + "-" + Graph.Keys.get(Graph.Keys.size()-1).split("\n")[3]);	
+					}
+					else if(Type<2||Type==5) {
 					dataset.addValue(Data[j][k], XGroupsLabels.get(j), XCategories.get(k).split("\n")[0] + "-" + Graph.Keys.get(Graph.Keys.size()-1).split("\n")[0]);
 					}
 					else if(Type<3){

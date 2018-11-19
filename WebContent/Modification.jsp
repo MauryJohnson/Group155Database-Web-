@@ -73,7 +73,8 @@
     <form action="UpdateResults.jsp" method="GET">
     <h1>
     <textarea class="myTextarea" name = "Mod"><%try{if((String)sess.getAttribute(ip)!=null){out.print((String)sess.getAttribute(ip));}else{/*out.print("");*/}}catch(Exception e){}%></textarea>
-    <input type="hidden" name ="query" value = "frequents"/>Frequents<input type="submit" name ="submit" value="Send" onclick = "{document.frm.hdnbt.value=this.value;document.frm.submit();}"> 
+    <input type="hidden" name ="query" value = "frequents"/>
+    <input type="submit" name ="submit" value="Send" onclick = "{document.frm.hdnbt.value=this.value;document.frm.submit();}"> 
 	</h1>
     </form>
     

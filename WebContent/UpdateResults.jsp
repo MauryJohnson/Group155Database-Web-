@@ -57,6 +57,19 @@ try {
     	String Table = (String)request.getParameter("query");
     	System.out.printf("\nTABEL GOT: %s\n",Table);
     	
+    	boolean BarInsert = Table.equals("bars2");
+    	
+    	if(BarInsert){
+    		Table.replace("2","");
+    		
+    		Table = QS.NotATransaction(qry);
+    		
+    		if(Table==null){
+    			%><tr><td><%out.println("Invalid Update/Insert/Delete For Table:"); out.println(Table);%></td></tr>
+    			<%
+    			return;
+    		}
+    	}
     	
     	int Valid = QS.ValidateModification(qry,Table);
     	
@@ -90,7 +103,7 @@ try {
     		<tr>
     		<td>
     		<%
-    		if(Valid==1){
+    		if(Valid==1 && !BarInsert){
     	    	out.println("Successful Update on");
     	    	out.println(Table);
     	    	}
@@ -98,7 +111,7 @@ try {
     	    		out.println("Successful Insert on");
     	        	out.println(Table);
     	    	}
-    	    	else if(Valid==3){
+    	    	else if(Valid==3 &&!BarInsert){
     	    		out.println("Successful Delete on");
     	        	out.println(Table);
     	    	}

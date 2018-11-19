@@ -74,8 +74,10 @@ href="Give Query.jsp">MySQL Query</a>
 					rs = st.executeQuery(qry);
 					ResultSetMetaData rsmd = rs.getMetaData();
 					
+					String Title = "Bars Where "+Beer+" Sells the Most";
+					
 					%>
-					<my:SetGraph setQry="<%=qry%>" setTitle="<%="Bars Where "+Beer+" Sells the Most" %>" setCategory="Most Beer Sells in Bars" setXLabel="Beers" setYLabel="Frequency" setRsmd="<%=rsmd%>" setRs="<%=rs%>" setType="5" />
+					<my:SetGraph setQry="<%=qry%>" setTitle="<%=Title%>" setCategory="Most Beer Sells in Bars" setXLabel="Beers" setYLabel="Frequency" setRsmd="<%=rsmd%>" setRs="<%=rs%>" setType="5" />
 					<my:PrintGraph setType="0"/>
 					<% 
 				//First Image
@@ -85,8 +87,11 @@ href="Give Query.jsp">MySQL Query</a>
 					rs = st.executeQuery(qry);
 					rsmd = rs.getMetaData();
 				
+					Title = "Drinkers_who_are_the_biggest_consumers of "+Beer;
+					
+					
 					%>
-					<my:SetGraph setQry="<%=qry%>" setTitle="<%="Drinkers who are the biggest consumers of "+Beer%>" setCategory="Biggest Consumers" setXLabel="Drinkers" setYLabel="Frequency" setRsmd="<%=rsmd%>" setRs="<%=rs%>" setType="6" />
+					<my:SetGraph setQry="<%=qry%>" setTitle="<%=Title%>" setCategory="Biggest Consumers" setXLabel="Drinkers" setYLabel="Frequency" setRsmd="<%=rsmd%>" setRs="<%=rs%>" setType="6" />
 					<my:PrintGraph setType="1"/>
 					<%
 					
@@ -97,8 +102,11 @@ href="Give Query.jsp">MySQL Query</a>
 					rs = st.executeQuery(qry);
 					rsmd = rs.getMetaData();
 				
+					Title = "Time_distribution_of_Where_"+Beer+"_Sells_the_Most";
+					
+					
 					%>
-					<my:SetGraph setQry="<%=qry%>" setTitle="<%="Time distribution of Where "+Beer+" Sells the Most"%>" setCategory="Time Distribution" setXLabel="Time" setYLabel="Frequency" setRsmd="<%=rsmd%>" setRs="<%=rs%>" setType="6" />
+					<my:SetGraph setQry="<%=qry%>" setTitle="<%=Title%>" setCategory="Time Distribution" setXLabel="Time" setYLabel="Frequency" setRsmd="<%=rsmd%>" setRs="<%=rs%>" setType="6" />
 					<my:PrintGraph setType="2"/>
 					<%
 					

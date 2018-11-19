@@ -26,7 +26,7 @@
 				<a href="Modification.jsp">Modification</a>
 				<a href="Give Query.jsp">MySQL Query</a>
 		</nav>
-		<h1 class="clearfix"><a href="#">Query Details</a></h1>
+		
 	</header>
 </div>
 
